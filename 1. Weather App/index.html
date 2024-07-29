@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Weather App </title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="card">
+        <!--Search Box -->
+        <div class="search">
+            <!--Input field -->
+            <input type="text" placeholder="enter city name" spellcheck="false">
+            <!--Button-->
+            <button><img src="images/search.png"> </button>
+        </div>
+
+        <!--Note: As we have to display the weather detail of any city, so first we will add a random city, then we will update it using API -->
+
+        <!--Weather-->
+        <div class="weather">
+            <!--Image-->
+            <img src="images/rain.png" class="weather-icon">
+            <!--Temprature-->
+            <h1 class="temp">22°C</h1>
+            <!--City Name-->
+            <h2 class="city">New York</h2>
+
+            <!--Now we will also display: humidity and wind icons and the values-->
+
+            <!--Details: Humidity & Wind Speed -->
+            <div class="details">
+                <!-- we will create 2 columns in it -->
+
+                 <div class="col">
+                    <!--image-->
+                    <img src="images/humidity.png">
+                    <!--text-->
+                    <div>
+                        <p class="humidity">50%</p>
+                        <p>Humidity</p>
+                    </div>
+                 </div>
+
+                 <div class="col">
+                    <!--image-->
+                    <img src="images/wind.png">
+                    <!--text-->
+                    <div>
+                        <p class="wind">15 km/h</p>
+                        <p>Wind Speed</p>
+                    </div>
+                 </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- NEXT: WE WANT TO UPDATE THIS WEATHER INFORMATION WHEN WE ENTER ANY CITY NAME, FOR THAT USE API-->
+    <script>
+
+        const apiKey = "d8e76a22463d568df16f7e71a46a0469"; //from openweathermap.com after creating account
+        const apiUrl = "https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
+
+        const searchBox = document.querySelector(".search input") //it will select the input field that we set above
+            const searchBtn = document.querySelector(".search button") //when ppl click on search button, it will send the above city info to checkWeather function
+
+        async function checkWeather(city) {
+            const response = await fetch (apiUrl + city + `&appid=${apiKey}`);
+            var data = await response.json();
+
+            console.log(data);
+
+            // we have to update 'temperature, city, humidity and wind' information (according to data coming from API), so select them
+            document.querySelector(".city").innerHTML = data.name; //.city will select the city element and innerHTML will update the document(webpage), as in json data as seen in console, the city name is in 'name', that's why we set 'data.name'
+            document.querySelector(".temp").innerHTML = Math.round(data.main.temp) + "°C";
+            document.querySelector(".humidity").innerHTML = data.main.humidity + "%";
+            document.querySelector(".wind").innerHTML = data.wind.speed + " km/h";
+        }
+
+        searchBtn.addEventListener("click", () => { //in this function we will call the checkWeather (which will have the city information in the input field, to get that data, add the searchbox.value)
+            checkWeather(searchBox.value); // this will add the city name in the API, and will give the information of that particular city
+        })
+        //checkWeather(); //by calling it here, whenever the webpage is loaded, it will call the function
+
+    </script>
+</body>
+</html>

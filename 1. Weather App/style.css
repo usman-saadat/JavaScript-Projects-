@@ -1,0 +1,118 @@
+* {
+    margin: 0;
+    padding: 0; 
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+}
+
+/* Let's add background color to body */
+body {
+    background: #222;
+}
+
+/* 1. SEARCH BOX */
+
+/* Let's add some colors to card */
+.card {
+    width: 90%;
+    max-width: 470px;
+    background: linear-gradient(135deg, #00feba, #5b548a);
+    color: #fff; /* text color in this card */
+    margin: 100px auto 0; /*100 px from top, 0 from bottom, left right auto */
+    border-radius: 20px; /* to make corners round */
+    padding: 40px 35px; /* space inside the card */
+    text-align: center;
+}
+
+/* Now let's do some CSS from the 'search' class */
+.search {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* this will alight input field and search button horizontally side by side */
+}
+
+/* let's write CSS for input field */
+.search input {
+    border: 0;
+    outline: 0;
+    background: #ebfffc;
+    color: #555;
+    padding: 10px 25px;
+    height: 60px;
+    border-radius: 30px;
+    flex: 1;
+    margin-right: 16px;
+    font-size: 18px;
+}
+
+/* let's design the button now */
+.search button {
+    border: 0;
+    outline: 0;
+    background: #ebfffc;
+    border-radius: 50%; /* so it will be a circle */
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+}
+
+/* as we have the search button with img tag */
+.search button img {
+    width: 16px;
+}
+
+/* ------------------------------------------- */
+
+/* 2. WEATHER */
+
+/* fixing weather icon */
+.weather-icon {
+    width: 170px;
+    margin-top: 30px;
+}
+
+/* then we have titles in h1 and h2 */
+.weather h1 {
+    font-size: 80px;
+    font-weight: 500;
+}
+
+.weather h2 {
+    font-size: 45px;
+    font-weight: 400;
+    margin-top: -10px;
+}
+/* so far we have good size of weather app icon and text */
+
+/* Now let's work on 'Details' class */
+
+.details {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    margin-top: 50px;
+} /* this will put humidity on left and windspeed on right side */
+
+/* now let's update the sizes of these icons and text of humidity and wind */
+
+.col {
+    display: flex;
+    align-items: center;
+    text-align: left;
+}
+
+.col img {
+    width: 40px;
+    margin-right: 10px;
+} /* the image will be in good size now */
+
+/* now let's do the texts of both humidity and wind speed */
+
+.humidity, .wind {
+    font-size: 28px; /*increase sizes of 50% and 15kph texts */
+    margin-top: -6px;
+}
+
+/* NEXT: WE WANT TO UPDATE THIS WEATHER INFORMATION WHEN WE ENTER ANY CITY NAME FOR THAT USE API */
