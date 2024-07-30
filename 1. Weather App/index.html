@@ -13,9 +13,14 @@
         <div class="search">
             <!--Input field -->
             <input type="text" placeholder="enter city name" spellcheck="false">
-            <!--Button-->
+            <!--Button Image-->
             <button><img src="images/search.png"> </button>
         </div>
+
+        <!-- if wrong value is entered in search box-->
+         <div class="error">
+            <p>Invalid city name</p>
+         </div>
 
         <!--Note: As we have to display the weather detail of any city, so first we will add a random city, then we will update it using API -->
 
@@ -64,26 +69,54 @@
         const apiKey = "d8e76a22463d568df16f7e71a46a0469"; //from openweathermap.com after creating account
         const apiUrl = "https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
 
-        const searchBox = document.querySelector(".search input") //it will select the input field that we set above
-            const searchBtn = document.querySelector(".search button") //when ppl click on search button, it will send the above city info to checkWeather function
+        const searchBox = document.querySelector(".search input")  // Selecting the input element within the element with class 'search' and storing it in searchBox.
+        const searchBtn = document.querySelector(".search button") // Selecting the button element within the element with class 'search' and storing it in searchBtn.
+        const weatherIcon = document.querySelector(".weather-icon")
 
-        async function checkWeather(city) {
-            const response = await fetch (apiUrl + city + `&appid=${apiKey}`);
-            var data = await response.json();
+        async function checkWeather(city) { // Declaring an asynchronous function to fetch weather data for a given city.
+            const response = await fetch (apiUrl + city + `&appid=${apiKey}`); // Await the response from the fetch API call to the OpenWeatherMap API with the city and API key.
+            
+            if(response.status ==404){
+                document.querySelector(".error").style.display = "block";
+                document.querySelector(".weather").style.display = "none";
+            } else {
 
-            console.log(data);
+                var data = await response.json(); // Parse the JSON data from the HTTP response and return it as a JavaScript Object.
 
             // we have to update 'temperature, city, humidity and wind' information (according to data coming from API), so select them
-            document.querySelector(".city").innerHTML = data.name; //.city will select the city element and innerHTML will update the document(webpage), as in json data as seen in console, the city name is in 'name', that's why we set 'data.name'
-            document.querySelector(".temp").innerHTML = Math.round(data.main.temp) + "°C";
-            document.querySelector(".humidity").innerHTML = data.main.humidity + "%";
-            document.querySelector(".wind").innerHTML = data.wind.speed + " km/h";
+            document.querySelector(".city").innerHTML = data.name; // Update the HTML content of the element with class 'city' to the city name from the API data.
+            document.querySelector(".temp").innerHTML = Math.round(data.main.temp) + "°C"; // Update the HTML content of the element with class 'temp' to the temperature (rounded) with a "°C" suffix.
+            document.querySelector(".humidity").innerHTML = data.main.humidity + "%"; // Update the HTML content of the element with class 'humidity' to the humidity percentage from the API data.
+            document.querySelector(".wind").innerHTML = data.wind.speed + " km/h"; // Update the HTML content of the element with class 'wind' to the wind speed (in km/h) from the API data.
+        
+            // to change weather photo as per the weather
+            if(data.weather[0].main == 'Clouds') {
+                weatherIcon.src = "images/clouds.png";
+            }
+            else if(data.weather[0].main == 'Clear') {
+                weatherIcon.src = "images/clear.png";
+            }
+            else if(data.weather[0].main == 'Rain') {
+                weatherIcon.src = "images/rain.png"
+            }
+            else if(data.weather[0].main == 'Drizzle') {
+                weatherIcon.src = "images/drizzle.png"
+            }
+            else if(data.weather[0].main == 'Mist') {
+                weatherIcon.src = "images/mist.png"
+            }
+
+            // to show entered city's details (coz we have set 'none' by default, but it doesn't show any details of any city coz of that. So, to show the city details, write this line)
+            document.querySelector(".weather").style.display = "block";
+            document.querySelector(".error").style.display = "none";
+
+            }
+        
         }
 
-        searchBtn.addEventListener("click", () => { //in this function we will call the checkWeather (which will have the city information in the input field, to get that data, add the searchbox.value)
+        searchBtn.addEventListener("click", () => {     // Adding an event listener to the search button that calls the checkWeather function with the value from the search box when clicked.
             checkWeather(searchBox.value); // this will add the city name in the API, and will give the information of that particular city
         })
-        //checkWeather(); //by calling it here, whenever the webpage is loaded, it will call the function
 
     </script>
 </body>

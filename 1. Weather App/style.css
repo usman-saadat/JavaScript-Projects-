@@ -24,12 +24,12 @@ body {
     text-align: center;
 }
 
-/* Now let's do some CSS from the 'search' class */
+/* Now let's do some CSS for the 'search' class */
 .search {
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: space-between; /* this will alight input field and search button horizontally side by side */
+    justify-content: space-between; /* this will align input field and search button horizontally side by side */
 }
 
 /* let's write CSS for input field */
@@ -116,3 +116,16 @@ body {
 }
 
 /* NEXT: WE WANT TO UPDATE THIS WEATHER INFORMATION WHEN WE ENTER ANY CITY NAME FOR THAT USE API */
+
+/* to appear no result of any city by default when we open the app */
+.weather {
+    display: none; /* it will hide the 'new york weather details that we set in html as default' */
+}
+
+.error {
+    text-align: left;
+    margin-left: 10px;
+    font-size: 14px;
+    margin-top: 10px;
+    display: none; /* so by default this message will be hidden */
+}

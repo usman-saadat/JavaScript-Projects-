@@ -1,0 +1,137 @@
+Let's go through each line of the script with detailed comments and show what values are stored at each step.
+
+```html
+<script>
+    // Declaring a constant variable to store the API key for OpenWeatherMap.
+    // This key is obtained after creating an account on OpenWeatherMap.
+    const apiKey = "d8e76a22463d568df16f7e71a46a0469";
+    // Value of apiKey: "d8e76a22463d568df16f7e71a46a0469"
+
+    // Declaring a constant variable to store the base URL for the OpenWeatherMap API.
+    // The 'units=metric' parameter ensures the temperature is returned in Celsius.
+    const apiUrl = "https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
+    // Value of apiUrl: "https://api.openweathermap.org/data/2.5/weather?units=metric&q="
+
+    // Selecting the input element within the element with class 'search' and storing it in searchBox.
+    const searchBox = document.querySelector(".search input");
+    // Value of searchBox: Reference to the input element in the HTML.
+
+    // Selecting the button element within the element with class 'search' and storing it in searchBtn.
+    const searchBtn = document.querySelector(".search button");
+    // Value of searchBtn: Reference to the button element in the HTML.
+
+    // Selecting the image element within the element with class 'weather-icon' and storing it in weatherIcon.
+    const weatherIcon = document.querySelector(".weather-icon");
+    // Value of weatherIcon: Reference to the image element in the HTML.
+
+    // Declaring an asynchronous function to fetch weather data for a given city.
+    async function checkWeather(city) {
+        // Await the response from the fetch API call to the OpenWeatherMap API with the city and API key.
+        const response = await fetch(apiUrl + city + `&appid=${apiKey}`);
+        // Example value of response (if city is "London"): Response object from the fetch call.
+
+        // Check if the response status is 404 (Not Found).
+        if(response.status == 404) {
+            // If city is not found, display the error message and hide the weather details.
+            document.querySelector(".error").style.display = "block";
+            document.querySelector(".weather").style.display = "none";
+        } else {
+            // Parse the JSON data from the HTTP response and return it as a JavaScript Object.
+            var data = await response.json();
+            // Example value of data (if city is "London"):
+            // {
+            //     "name": "London",
+            //     "main": {
+            //         "temp": 15.0,
+            //         "humidity": 81
+            //     },
+            //     "wind": {
+            //         "speed": 4.1
+            //     },
+            //     "weather": [{
+            //         "main": "Clouds"
+            //     }]
+            // }
+
+            // Log the data to the console for debugging.
+            console.log(data);
+
+            // Update the HTML content of the element with class 'city' to the city name from the API data.
+            document.querySelector(".city").innerHTML = data.name;
+            // Value of .city element's innerHTML: "London"
+
+            // Update the HTML content of the element with class 'temp' to the temperature (rounded) with a "°C" suffix.
+            document.querySelector(".temp").innerHTML = Math.round(data.main.temp) + "°C";
+            // Value of .temp element's innerHTML: "15°C"
+
+            // Update the HTML content of the element with class 'humidity' to the humidity percentage from the API data.
+            document.querySelector(".humidity").innerHTML = data.main.humidity + "%";
+            // Value of .humidity element's innerHTML: "81%"
+
+            // Update the HTML content of the element with class 'wind' to the wind speed (in km/h) from the API data.
+            document.querySelector(".wind").innerHTML = data.wind.speed + " km/h";
+            // Value of .wind element's innerHTML: "4.1 km/h"
+
+            // To change the weather photo as per the weather condition.
+            if(data.weather[0].main == 'Clouds') {
+                weatherIcon.src = "images/clouds.png";
+            }
+            else if(data.weather[0].main == 'Clear') {
+                weatherIcon.src = "images/clear.png";
+            }
+            else if(data.weather[0].main == 'Rain') {
+                weatherIcon.src = "images/rain.png";
+            }
+            else if(data.weather[0].main == 'Drizzle') {
+                weatherIcon.src = "images/drizzle.png";
+            }
+            else if(data.weather[0].main == 'Mist') {
+                weatherIcon.src = "images/mist.png";
+            }
+
+            // Show the weather details for the entered city.
+            document.querySelector(".weather").style.display = "block";
+            // Hide the error message.
+            document.querySelector(".error").style.display = "none";
+        }
+    }
+
+    // Adding an event listener to the search button that calls the checkWeather function with the value from the search box when clicked.
+    searchBtn.addEventListener("click", () => {
+        // This will add the city name in the API call and fetch the information of that particular city.
+        checkWeather(searchBox.value);
+        // Value of searchBox.value: The current text in the input field (e.g., "London").
+    });
+
+    // By calling checkWeather here, the function would be called whenever the webpage is loaded.
+    // This line is commented out, so the function won't be called on page load.
+    // checkWeather();
+</script>
+```
+
+### Summary of Values at Each Step
+
+1. apiKey: "d8e76a22463d568df16f7e71a46a0469"
+2. apiUrl: "https://api.openweathermap.org/data/2.5/weather?units=metric&q="
+3. searchBox: Reference to the input element in the HTML.
+4. searchBtn: Reference to the button element in the HTML.
+5. weatherIcon: Reference to the image element in the HTML.
+6. city (passed to checkWeather function): The value entered in the searchBox (e.g., "London").
+7. response: Response object from the fetch call.
+8. data: Parsed JSON object containing weather data (e.g., for "London"):
+   - data.name: "London"
+   - data.main.temp: 15.0 (temperature in Celsius)
+   - data.main.humidity: 81 (humidity percentage)
+   - data.wind.speed: 4.1 (wind speed in km/h)
+   - data.weather[0].main: "Clouds" (weather condition)
+
+9. HTML updates:
+   - `.city` innerHTML: "London"
+   - `.temp` innerHTML: "15°C"
+   - `.humidity` innerHTML: "81%"
+   - `.wind` innerHTML: "4.1 km/h"
+   - `weatherIcon.src`: "images/clouds.png" (based on weather condition)
+   - `.weather` display: "block" (show weather details)
+   - `.error` display: "none" (hide error message)
+
+This detailed breakdown should help you understand how the code works and what each part is doing at every step.
