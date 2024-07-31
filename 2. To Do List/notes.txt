@@ -1,0 +1,80 @@
+const inputBox = document.getElementById('input-box'); 
+// Fetches the element with the ID 'input-box' and assigns it to the variable inputBox.
+// Example value: <input type="text" id="input-box">
+
+const listcontainer = document.getElementById('list-container'); 
+// Fetches the element with the ID 'list-container' and assigns it to the variable listcontainer.
+// Example value: <ul id="list-container"></ul>
+
+function addTask() {
+    if(inputBox.value === ''){ 
+        // Checks if the input box is empty.
+        alert("You must write something!"); 
+        // If empty, shows an alert.
+    } else {
+        let li = document.createElement('li'); 
+        // Creates a new 'li' element and assigns it to the variable li.
+        // Example value: <li></li>
+        
+        li.innerHTML = inputBox.value; 
+        // Sets the inner HTML of the 'li' element to the value from the input box.
+        // Example value if inputBox.value is 'Task 1': <li>Task 1</li>
+        
+        listcontainer.appendChild(li); 
+        // Appends the 'li' element to the list container.
+        // Example value of listcontainer: <ul id="list-container"><li>Task 1</li></ul>
+        
+        let span = document.createElement('span'); 
+        // Creates a new 'span' element and assigns it to the variable span.
+        // Example value: <span></span>
+        
+        span.innerHTML = "\u00d7"; 
+        // Sets the inner HTML of the 'span' element to the '×' character.
+        // Example value: <span>×</span>
+        
+        li.appendChild(span); 
+        // Appends the 'span' element to the 'li' element.
+        // Example value of li: <li>Task 1<span>×</span></li>
+    }
+    inputBox.value = ''; 
+    // Clears the input box by setting its value to an empty string.
+    // Example value: <input type="text" id="input-box" value="">
+    
+    saveData(); 
+    // Calls the saveData function to save the current list of tasks to local storage.
+}
+
+// Code for checking/unchecking and deleting tasks (when clicking on the cross icon)
+listcontainer.addEventListener("click", function(e){ 
+    // Adds an event listener to the list container that listens for click events.
+    if(e.target.tagName === "LI"){ 
+        // Checks if the clicked element is an 'li'.
+        e.target.classList.toggle("checked"); 
+        // Toggles the 'checked' class on the clicked 'li' element.
+        // Example: If 'li' is not checked, it adds the 'checked' class; if already checked, it removes the class.
+        
+        saveData(); 
+        // Calls the saveData function to save the current list of tasks to local storage.
+    } else if(e.target.tagName === "SPAN") { 
+        // Checks if the clicked element is a 'span'.
+        e.target.parentElement.remove(); 
+        // Removes the parent 'li' element of the clicked 'span', effectively deleting the task.
+        
+        saveData(); 
+        // Calls the saveData function to save the current list of tasks to local storage.
+    }
+}, false);
+
+// Function to save tasks to local storage
+function saveData() {
+    localStorage.setItem("data", listcontainer.innerHTML); 
+    // Saves the current inner HTML of the list container to local storage with the key 'data'.
+}
+
+// Function to display saved tasks when the page is loaded
+function showTask() {
+    listcontainer.innerHTML = localStorage.getItem("data"); 
+    // Sets the inner HTML of the list container to the value stored in local storage with the key 'data'.
+}
+showTask(); 
+// Calls the showTask function to display the saved tasks when the page is loaded.
