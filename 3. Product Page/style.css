@@ -1,0 +1,221 @@
+/* basic formatting for browser */
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+}
+
+.container {
+    width: 100%;
+    min-height: 100vh;
+    background: #d0eaff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.product {
+    width: 90%;
+    max-width: 750px;
+    display: flex; /* so left and right coloumns will be side by side */
+}
+
+.gallery {
+    flex-basis: 47%; /* means, width is 47% */
+    background: #241e20;
+    transform: scale(1.08); /* it iwll increase the size */
+    box-shadow: -10px 5px 10px 10px rgba(0, 0, 0, 0.1);
+    position: relative; /* so the control buttons will only be in gallery */
+}
+
+/* in this gallery we have image, so again choose gallery img tag */
+.gallery img {
+    width: 100%;
+    display: block;
+    padding-top: 100px;
+}
+
+/* now we will right CSS for right column which is 'detals' */
+.details {
+    flex-basis: 53%;
+    background: #fff;
+    padding: 40px;
+    padding-left: 60px;
+    box-shadow: -10px 5px 10px 10px rgba(0, 0, 0, 0.1);
+    font-size: 13px;
+    font-weight: 500;
+    color: #777
+}
+
+/* now let's work with items in 'details', starting from 'h1' */
+.details h1 {
+    color: #333;
+    font-size: 35px;
+}
+
+.details h2 {
+    color: #555;
+    font-size: 30px;
+    font-weight: 600;
+}
+
+.details h3 {
+    color: #00d874;
+    margin-bottom: 20px;
+}
+
+/* now let's do styling of 'form' element in 'details' */
+.details form {
+    font-size: 15px;
+    font-weight: 400;
+}
+
+.size-select {
+    display: flex; /* so that text and radio buttons will be in same horizontal line */
+    align-items: center; 
+    margin-top: 50px;
+}
+
+.size-select p {
+    width: 70px; /* this will add space between 'Size' text and radion buttons of sizes */
+}
+
+/* let's change colors of 'S, M, L, XL, XXL */
+.size-select input:checked + span { /* means if input is checked then we have to change the color of span text */
+    color: blue;
+    font-weight: 600;
+}
+
+/* let's hide these radio buttons, so that there's only text of Sizes */
+.size-select input {
+    display: none;
+}
+
+/* now let's bring space between all sizes */
+
+.size-select span {
+    padding: 5px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+/* NOW WORKING WITH COLOR */
+
+/* bringing color text  and radio buttons in same line  */
+.color-select {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+
+/* giving some spacing between color text all radion buttons (but radio buttons will still be joined together) */
+.color-select p{
+    width: 75px; 
+}
+
+/* now to add different colors to each radio button, first work with span */
+.color-select span{
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%; /* to make it circle */
+    margin-right: 15px;
+    cursor: pointer;
+}
+
+/* to add different color in each span, use their classes */
+.color-1 {
+    background: red;
+}
+
+.color-2 {
+    background: #00d874;
+}
+
+.color-3 {
+    background: blue;
+}
+
+.color-4 {
+    background: pink;
+} /* you will be seeing different color circles with radio buttons */
+
+/* let's hide radio buttons and only have colors */
+.color-select input {
+    display: none;
+}
+
+/* the above just showed you colors, but you can't select them, to select them.. */
+.color-select input:checked + span { /* so whenever the input button is checked we will design the span */
+    transform: scale(0.7); /* it will reduce the size */
+    box-shadow: 0 0 0 4px #fff, 0 0 0 6px #000 ; /* we are adding 2 shadows, in white and black color */
+}
+
+/* WORKING WITH QUANTITY */
+
+/* to bring Quantity and the input box where put can choose quantity in same line */
+.quantity-select {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+
+/* to bring space between Quantity and the input box */
+.quantity-select p {
+    width: 75px;
+}
+
+/* let's design the input field now */
+.quantity-select input {
+    background: #eee;
+    border: 0;
+    outline: 0;
+    padding: 2px 2px 2px 15px;
+    width: 50px;
+    border-radius: 12px;
+}
+
+/* NOW WORKING WITH BUTTON */
+
+form button {
+    background: #553ff0;
+    color: #fff; /* button text color */
+    font-size: 17px; /* increasing font size */
+    width: 100%;
+    padding: 10px;
+    border-radius: 30px;
+    border: 0;
+    outline: 0;
+    margin-top: 50px; /* to make space between button and the 'Quantity' class above */
+    box-shadow: 0 10px 10px rgba(85, 63, 240, 0.25);
+    cursor: pointer;
+}
+
+/* WORKING WITH 'CONTROLS' CLASS (for different images) */
+
+/* put control buttons on the bottom right side of the gallery */
+.controls {
+    position: absolute; /* as we have set position absolute here, go above to gallery and set position to relative */
+    bottom: 40px;
+    right: 20px;
+}
+
+/*  */
+.btn {
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%; /* to make it a small circle */
+    background: rgba(255, 2555, 255, 0.5); /* rgba with 50% opacity */
+    margin: 10px;
+    cursor: pointer;
+}
+
+.btn.active {
+    background: #553ff0; /* this will add the blue color in first dot */
+}
+
+/* NOW WE HAVE TO ADD THE CLICK FUNCTION, SO THAT WHEN WE CLICK ON ANY DOT, THE IMAGE SHOULD CHANGE.
+FOR THAT LET'S ADD THE JAVASCRIPT. WE WILL THE CLICK FEATURE ON THE SPAN WHERE WE HAVE ADDED 
+CLASS NAME 'btn', AND WE WILL CHANGE THE IMAGE IN img TAG with ID "produtImg */

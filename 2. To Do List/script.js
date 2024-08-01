@@ -18,7 +18,7 @@ function addTask() {
 }
 
 // code for check/uncheck and delete task (when clicked on cross icon)
-listcontainer.addEventListener("click", function(e){ // in list container we store all created tasks, swo when we click on it
+listcontainer.addEventListener("click", function(e){ // in list container we store all created tasks, so when we click on it
     if(e.target.tagName === "LI"){ // it will check where we clicked, if we clicked on LI
         e.target.classList.toggle("checked"); // it will add the checked class name, if checked class name is already there, it will remove it because we have added 'classList.toggle' from the target element (if the clicked target element is LI).
         saveData(); // call 'saveData' when we check or uncheck task
@@ -27,7 +27,7 @@ listcontainer.addEventListener("click", function(e){ // in list container we sto
         e.target.parentElement.remove() // then it will delete the parent element (which is LI element), so the task will be deleted
         saveData(); //call 'saveData' when we delete the task
     }
-}, false);
+}, false); // the false specifies that the event listener should use 'bubbling' rather than 'capturing'. By default, event listeners are set to bubbling, so explicitly setting it to false ensures this behavior.
 
 // the tasks get deleted when we refresh the browser, create function to fix that
 function saveData() {

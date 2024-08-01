@@ -25,7 +25,10 @@ function addTask() {
         // Example value of listcontainer: <ul id="list-container"><li>Task 1</li></ul>
         
         let span = document.createElement('span'); 
-        // Creates a new 'span' element and assigns it to the variable span.
+        // Creates a new 'span' element and assigns it to the variable span. The purpose 
+        of creating the span element is to add a "delete" button (or a "remove task" button) 
+        next to each task item in the list. This span element will contain a "×" character,
+        which typically represents a close or delete icon.
         // Example value: <span></span>
         
         span.innerHTML = "\u00d7"; 
@@ -46,9 +49,12 @@ function addTask() {
 
 // Code for checking/unchecking and deleting tasks (when clicking on the cross icon)
 listcontainer.addEventListener("click", function(e){ 
-    // Adds an event listener to the list container that listens for click events.
+    // Adds an event listener to the list container that listens for click events. 
+    The 'e' parameter represents the 'event' object that is automatically passed to the 
+    event handler function when a click event occurs.
     if(e.target.tagName === "LI"){ 
-        // Checks if the clicked element is an 'li'.
+        // Checks if the clicked element is an 'li'. ('e.target': The element that 
+        triggered the event (the clicked element).
         e.target.classList.toggle("checked"); 
         // Toggles the 'checked' class on the clicked 'li' element.
         // Example: If 'li' is not checked, it adds the 'checked' class; if already checked, it removes the class.

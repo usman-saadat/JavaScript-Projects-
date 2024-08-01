@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Product Page </title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="product">
+            <!-- 2 coloumns-->
+
+            <!--Image-->
+            <div class="gallery">
+                <img src="images/image1.png" id="productImg">
+                <!-- For different Images-->
+                 <div class="controls">
+                    <span class="btn active"></span>
+                    <span class="btn"></span>
+                    <span class="btn"></span>
+                 </div>
+            </div>
+            <!-- Details -->
+             <div class="details">
+                <h1>Casual T Shirt</h1>
+                <h2>$15.00</h2>
+                <h3>30% OFF</h3>
+                <p> Wrangler is an American manufacturer of jeans and other clothing items, particularly workwear.</p>
+                <!-- radio buttons using form-->
+                 <form>
+                    <div class="size-select">
+                        <p>Size</p>
+                        <label for="small">
+                            <input type="radio" name="size" id="small">
+                            <span>S</span> <!--S means small-->
+                        </label>
+                        <label for="medium">
+                            <input type="radio" name="size" id="medium">
+                            <span>M</span> <!--M means Medium-->
+                        </label>
+                        <label for="large">
+                            <input type="radio" name="size" id="large">
+                            <span>L</span> <!--L means large-->
+                        </label>
+                        <label for="x-large">
+                            <input type="radio" name="size" id="x-large">
+                            <span>XL</span> <!--XL means Extra large-->
+                        </label>
+                        <label for="xx-large">
+                            <input type="radio" name="size" id="xx-large">
+                            <span>XXL</span> <!--XXL means Double Extra large-->
+                        </label>
+                    </div>
+
+                    <!--Color Select -->
+                    <div class="color-select">
+                        <p>Color</p>
+                        <label for="red">
+                            <input type="radio" name="color" id="red">
+                            <span class="color-1"></span> <!--for red color -->
+                        </label>
+                        <label for="green">
+                            <input type="radio" name="color" id="green">
+                            <span class="color-2"></span> <!--for green color -->
+                        </label>
+                        <label for="blue">
+                            <input type="radio" name="color" id="blue">
+                            <span class="color-3"></span> <!--for blue color -->
+                        </label>
+                        <label for="pink">
+                            <input type="radio" name="color" id="pink">
+                            <span class="color-4"></span> <!--for pink color -->
+                        </label>
+                    </div>
+
+                    <!-- Quantities -->
+                     <div class="quantity-select">
+                        <p>Quantity</p>
+                        <input type="number" value="1"> <!-- we can increase & decrease the value with arrows shown -->
+                     </div>
+
+                    <!--Submit Button -->
+                    <button>Buy Now</button>
+                 </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        let productImg = document.getElementById("productImg");
+        let btn = document.getElementsByClassName("btn")
+
+        btn[0].onclick = function() {
+            productImg.src = "images/image1.png"; // because we have to change the image
+
+            // as we have set class name 'active' in span, that's why the active circle on image is not changing when we click on other dots. To remove that do following:
+            for(bt of btn){
+                bt.classList.remove("active"); // it will remove the 'active' class name from all the circles. 
+            }
+            // after removing it, we have to add the circle to particular class where we have clicked
+            this.classList.add("active");
+        }
+
+        btn[1].onclick = function() {
+            productImg.src = "images/image2.png"; 
+            // as we have set class name 'active' in span, that's why the active circle on image is not changing when we click on other dots. To remove that do following:
+            for(bt of btn){
+                bt.classList.remove("active"); // it will remove the 'active' class name from all the circles. 
+            }
+            // after removing it, we have to add the circle to particular class where we have clicked
+            this.classList.add("active");
+        }
+
+        btn[2].onclick = function() {
+            productImg.src = "images/image3.png"; 
+            // as we have set class name 'active' in span, that's why the active circle on image is not changing when we click on other dots. To remove that do following:
+            for(bt of btn){
+                bt.classList.remove("active"); // it will remove the 'active' class name from all the circles. 
+            }
+            // after removing it, we have to add the circle to particular class where we have clicked
+            this.classList.add("active");
+        }
+
+    </script>
+</body>
+</html>

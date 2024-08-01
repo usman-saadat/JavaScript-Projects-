@@ -98,14 +98,14 @@ ul li.checked {
 }
 
 /* now add another icon here of 'marked checked' 'tick one' to same task */
-ul li.checked::before { /*again using sudo element 'before' */
+ul li.checked::before { /* again using sudo element 'before' */
     background-image: url(images/checked.png); /* this will mard checked to the tast */
 }
 
 /* Right now these tasks are showing by default, we have to hide them so that they only show when clicked */
 /* so comment all lines of list in ul, and add JavaScript */
 
-/* writing CSS for span tag's 'cross icon' */
+/* writing CSS for span tag's 'cross icon'. (We didn't create it in HTML, but in JS while appending list) */
 ul li span {
     position: absolute;
     right: 0;
